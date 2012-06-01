@@ -1,6 +1,5 @@
 $LOAD_PATH << File.dirname(File.expand_path(__FILE__).to_s).to_s
 require 'rubygems'
-require 'daemons'
 require 'yaml'
 require 'git'
 require 'connectors/all'
@@ -34,22 +33,27 @@ conf.each do |connector,config|
   end
 end
 
-# update all admin repositories
-gconnectors.each {|gcon| gcon.load}
+loop {
+  begin
+    # update all admin repositories
+    gconnectors.each {|gcon| gcon.load}
 
-active_users = []
-connectors.each do |connector|
-  active_users += connector.getUsers
-end
+    active_users = []
+    connectors.each do |connector|
+      active_users += connector.getUsers
+    end
 
-active_users = active_users.uniq
+    active_users = active_users.uniq
 
-gconnectors.each do |gcon|
-  gcon.disableUsers(gcon.getUsers - active_users)
-  gcon.enableUsers(active_users - gcon.getUsers)
-end
+    gconnectors.each do |gcon|
+      gcon.disableUsers(gcon.getUsers - active_users)
+      gcon.enableUsers(active_users - gcon.getUsers)
+    end
 
-
-gconnectors.each { |gcon| gcon.save}
-
-
+    gconnectors.each { |gcon| gcon.save}
+  rescue
+    puts "Got exception but ignoring"
+  end
+  puts "Sleeping for 300 seconds..."
+  sleep(300)
+}
