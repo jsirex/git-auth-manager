@@ -9,5 +9,9 @@ module CONNECTOR
     def inspect
       "Connector: \"#{@url} #{@appname}@<password>\""
     end
+
+    def getUsers
+      ["sirex"]
+    end
   end
 end

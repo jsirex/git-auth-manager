@@ -34,19 +34,22 @@ conf.each do |connector,config|
   end
 end
 
+# update all admin repositories
+gconnectors.each {|gcon| gcon.load}
+
+active_users = []
+connectors.each do |connector|
+  active_users += connector.getUsers
+end
+
+active_users = active_users.uniq
+
 gconnectors.each do |gcon|
-  gcon.prepare
-  puts gcon.getUsers
+  gcon.disableUsers(gcon.getUsers - active_users)
+  gcon.enableUsers(active_users - gcon.getUsers)
 end
 
 
+gconnectors.each { |gcon| gcon.save}
 
 
-puts connectors.inspect
-#
-#
-#
-#connectors.each do |connector|
-#  connector.
-#end
-#

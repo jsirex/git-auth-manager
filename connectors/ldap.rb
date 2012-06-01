@@ -11,5 +11,9 @@ module CONNECTOR
       "Connector: \"#{@host} (#{@binddn}) #{@username}@<password>\""
     end
 
+    def getUsers
+      ["sirex", "yauhen.artsiukhou"]
+    end
+
   end
 end
