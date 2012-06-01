@@ -1,0 +1,31 @@
+# Describe here your connector
+# Currently exists:
+# * ldap
+# * crowd (from atlassian)
+#
+# ldap parameters:
+# host: host to connect
+# binddn: dn to search in, example: ou=myunit,dc=company,dc=com
+# username
+# password
+#
+# crowd parameters:
+# url: crowd url
+# appname: application name
+# apppassword: password for the application
+#
+
+
+
+ldap:
+  name: connector_name
+  host: dc01.mycompany.com
+  binddn: ou=myunit,dc=mycompany,dc=com
+  username: readonly_user
+  password: readonly_password
+
+crowd:
+  name: connector_name
+  url: http://crowd.mycompany.com
+  appname: gitosomthing
+  apppassword: password
