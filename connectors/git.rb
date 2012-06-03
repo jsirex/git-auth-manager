@@ -20,6 +20,7 @@ module CONNECTOR
       else
         clone_repo
       end
+      Dir.mkdir @disabled_path unless Dir.exist? @disabled_path
     end
 
     def getUsers

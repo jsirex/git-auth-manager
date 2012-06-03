@@ -51,9 +51,12 @@ loop {
     end
 
     gconnectors.each { |gcon| gcon.save}
-  rescue
+  rescue Exception => e
+    puts e
+    puts e.backtrace
     puts "Got exception but ignoring"
   end
   puts "Sleeping for 300 seconds..."
+  break if ARGV.find("--do-not-loop")
   sleep(300)
 }
