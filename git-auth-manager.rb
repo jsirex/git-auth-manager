@@ -56,7 +56,9 @@ loop {
     puts e.backtrace
     puts "Got exception but ignoring"
   end
-  puts "Sleeping for 300 seconds..."
+
   break if ARGV.find("--do-not-loop")
+
+  puts "Sleeping for 300 seconds..."
   sleep(300)
 }

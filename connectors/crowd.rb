@@ -12,7 +12,7 @@ module CONNECTOR
 
     def getUsers
       # TODO: get users from crowd
-      ["sirex"]
+      []
     end
   end
 end
