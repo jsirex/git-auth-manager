@@ -3,26 +3,32 @@
 # * ldap
 # * crowd (from atlassian)
 #
-# ldap parameters:
-# host: host to connect
-# binddn: dn to search in, example: ou=myunit,dc=company,dc=com
-# username
-# password
-#
-# crowd parameters:
-# url: crowd url
-# appname: application name
-# apppassword: password for the application
-#
+# You can use many git/ldap/crowd connections
 
+git:
+  name: gitosis
+  # where to store working copy
+  clone_path: /tmp/gitosis-admin
+  # original url or admin repo
+  #url: ssh://gitosis@git.mycompany.com/gitosis-admin.git
+  url: file:///tmp/source
+  # folder with public keys
+  keydir: keydir
+  # where to store disabled public keys
+  disabled: disabled
 
 
 ldap:
   name: connector_name
   host: dc01.mycompany.com
+  port: 6666
   binddn: ou=myunit,dc=mycompany,dc=com
-  username: readonly_user
+  username: cn=readonly_user,ou=myunit,dc=mycompnay,dc=com
   password: readonly_password
+  # Filter to search active users
+  filter: (&(objectClass=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))
+  # Unique ID: login name
+  uid: sAMAccountName
 
 crowd:
   name: connector_name

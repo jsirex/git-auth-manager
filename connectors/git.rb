@@ -6,7 +6,7 @@ module CONNECTOR
       @url = config[:url]
       @keydir = config[:keydir]
       @keydir_path = config[:clone_path] + '/' + config[:keydir]
-      @disabled_path = config[:clone_path] + '/disabled'
+      @disabled_path = config[:clone_path] + '/' + config[:disabled]
       @logmessage = ""
     end
 
