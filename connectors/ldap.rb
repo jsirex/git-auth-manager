@@ -19,10 +19,19 @@ module CONNECTOR
       conn = LDAP::Conn.new(@host, @port)
       conn.bind(@username, @password)
       users = Array.new
-      conn.search(@binddn, LDAP::LDAP_SCOPE_SUBTREE, @filter, @attr) do |entry|
+      filter = @filter.sub("TIMENOW_WINEPOCH", now_in_winepoch.to_s)
+      puts filter.inspect
+      conn.search(@binddn, LDAP::LDAP_SCOPE_SUBTREE, filter, @attr) do |entry|
         users += entry.vals(@attr) if entry.vals(@attr)
       end
+      puts users.sort.inspect
       users.map {|x| x.downcase}
+    end
+
+
+    private
+    def now_in_winepoch
+      (Time.now.to_i + 11644473600)*10000000
     end
 
   end

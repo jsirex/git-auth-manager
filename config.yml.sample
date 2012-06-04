@@ -25,8 +25,8 @@ ldap:
   binddn: ou=myunit,dc=mycompany,dc=com
   username: cn=readonly_user,ou=myunit,dc=mycompnay,dc=com
   password: readonly_password
-  # Filter to search active users
-  filter: (&(objectClass=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2)))
+  # All enabled and not expired (Windows Hack with TIMENOW_WINEPOCH period var as current time)
+  filter: (&(objectClass=person)(!(userAccountControl:1.2.840.113556.1.4.803:=2))(|(accountExpires=0)(accountExpires>=TIMENOW_WINEPOCH)))
   # Unique ID: login name
   uid: sAMAccountName
 
