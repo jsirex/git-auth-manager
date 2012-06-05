@@ -20,7 +20,6 @@ module CONNECTOR
       conn.bind(@username, @password)
       users = Array.new
       filter = @filter.sub("TIMENOW_WINEPOCH", now_in_winepoch.to_s)
-      puts filter.inspect
       conn.search(@binddn, LDAP::LDAP_SCOPE_SUBTREE, filter, @attr) do |entry|
         users += entry.vals(@attr) if entry.vals(@attr)
       end
