@@ -57,7 +57,7 @@ loop {
     puts "Got exception but ignoring"
   end
 
-  break if ARGV.find("--do-not-loop")
+  break if ARGV.find_index("--do-not-loop")
 
   puts "Sleeping for 300 seconds..."
   sleep(300)
