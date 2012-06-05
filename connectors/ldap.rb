@@ -24,7 +24,6 @@ module CONNECTOR
       conn.search(@binddn, LDAP::LDAP_SCOPE_SUBTREE, filter, @attr) do |entry|
         users += entry.vals(@attr) if entry.vals(@attr)
       end
-      puts users.sort.inspect
       users.map {|x| x.downcase}
     end
 

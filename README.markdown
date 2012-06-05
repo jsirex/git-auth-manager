@@ -33,6 +33,7 @@ Requirements
    * daemons
    * ruby-ldap
    * git
+ * libsasl2-dev
 
 Install
 -------
