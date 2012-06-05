@@ -41,7 +41,7 @@ module CONNECTOR
 
     def disableUsers(users)
       users.each do |user|
-        if File.exist? "#{@keydir_path}/#{user}.pub"
+        if File.exist? "#{@keydir_path}/#{user}.pub" and user != "admin" # admin.pub keept for administrative reasons
           FileUtils.mv "#{@keydir_path}/#{user}.pub", "#{@disabled_path}/#{user}.pub"
           puts "Disabled: #{user}."
           @logmessage += "Disabled: #{user}.\n"
