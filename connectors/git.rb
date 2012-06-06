@@ -82,3 +82,23 @@ module CONNECTOR
     end
   end
 end
+
+# Hack
+module Git
+  class Base
+    def pull(remote = 'origin', branch = 'master', message = 'origin pull')
+      fetch(remote, branch)
+      merge(branch, message)
+    end
+
+    def fetch(remote = 'origin', branch = 'master')
+      self.lib.fetch(remote, branch)
+    end
+  end
+
+  class Lib
+    def fetch(remote, branch = 'master')
+      command('fetch', [remote, branch])
+    end
+  end
+end
