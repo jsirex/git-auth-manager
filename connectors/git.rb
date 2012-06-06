@@ -16,9 +16,9 @@ module CONNECTOR
 
     def load
       if Dir.exist? @clone_path + "/.git" then
-        pull_repo
+        puts pull_repo
       else
-        clone_repo
+        puts clone_repo
       end
       Dir.mkdir @disabled_path unless Dir.exist? @disabled_path
     end

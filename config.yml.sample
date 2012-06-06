@@ -8,10 +8,9 @@
 git:
   name: gitosis
   # where to store working copy
-  clone_path: /tmp/gitosis-admin
-  # original url or admin repo
-  #url: ssh://gitosis@git.mycompany.com/gitosis-admin.git
-  url: file:///tmp/source
+  clone_path: /opt/gitolite/git-auth-manager/gitolite-admin
+  # where repository actually exists (can be any supported url)
+  url: file:///opt/gitolite/repositories/gitolite-admin.git
   # folder with public keys
   keydir: keydir
   # where to store disabled public keys
