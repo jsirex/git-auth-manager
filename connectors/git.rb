@@ -1,4 +1,6 @@
 require 'fileutils'
+require 'git'
+
 module CONNECTOR
   class GitConnector
     def initialize(config)
@@ -31,10 +33,14 @@ module CONNECTOR
 
     def enableUsers(users)
       users.each do |user|
-        if File.exist? "#{@disabled_path}/#{user}.pub" then
-          FileUtils.mv "#{@disabled_path}/#{user}.pub", "#{@keydir_path}/#{user}.pub"
-          puts "Enabled: #{user}."
-          @logmessage += "Enabled: #{user}.\n"
+        if File.exist? "#{@keydir_path}/#{user}.pub" then
+          FileUtils.rm_f "#{@disabled_path}/#{user}.pub"
+        else
+          if File.exist? "#{@disabled_path}/#{user}.pub" then
+            FileUtils.mv "#{@disabled_path}/#{user}.pub", "#{@keydir_path}/#{user}.pub"
+            puts "Enabled: #{user}."
+            @logmessage += "Enabled: #{user}.\n"
+          end
         end
       end
     end
@@ -42,7 +48,7 @@ module CONNECTOR
     def disableUsers(users)
       users.each do |user|
         if File.exist? "#{@keydir_path}/#{user}.pub" and user != "admin" # admin.pub keept for administrative reasons
-          FileUtils.mv "#{@keydir_path}/#{user}.pub", "#{@disabled_path}/#{user}.pub"
+          FileUtils.mv "#{@keydir_path}/#{user}.pub", "#{@disabled_path}/#{user}.pub", force: true
           puts "Disabled: #{user}."
           @logmessage += "Disabled: #{user}.\n"
         end
@@ -86,19 +92,14 @@ end
 # Hack
 module Git
   class Base
-    def pull(remote = 'origin', branch = 'master', message = 'origin pull')
-      fetch(remote, branch)
-      merge(branch, message)
-    end
-
-    def fetch(remote = 'origin', branch = 'master')
-      self.lib.fetch(remote, branch)
+    def pull
+      self.lib.pull
     end
   end
 
   class Lib
-    def fetch(remote, branch = 'master')
-      command('fetch', [remote, branch])
+    def pull
+      command('pull')
     end
   end
 end

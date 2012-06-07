@@ -1,7 +1,6 @@
 $LOAD_PATH << File.dirname(File.expand_path(__FILE__).to_s).to_s
 require 'rubygems'
 require 'yaml'
-require 'git'
 require 'connectors/all'
 
 CONFIG=File.dirname(__FILE__) + "/config.yml"
