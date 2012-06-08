@@ -1,6 +1,5 @@
 source 'http://rubygems.org'
 gem 'git'
 gem 'fileutils'
-gem 'yaml'
-gem 'ldap'
+gem 'ruby-ldap'
 gem 'daemons'

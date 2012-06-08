@@ -1,3 +1,5 @@
 config.yml
 .idea
 *.output
+Gemfile.lock
+.bundle
