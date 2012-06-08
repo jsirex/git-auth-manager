@@ -38,12 +38,12 @@ Requirements
 Install
 -------
 
- # Clone remote repository: `git clone https://github.com/jsirex/git-auth-manager.git`
- # Install dev packages of `libldap2` and `libsasl2`
- # Use `bundle install` or install required gems manually
- # Copy `config.yml.sample` to `config.yml`
- # Configure your daemon through `config.yml`
- # Start/Stop daemon using `ruby control.rb start` or `ruby control.rb stop`
+ 0. Clone remote repository: `git clone https://github.com/jsirex/git-auth-manager.git`
+ 0. Install dev packages of `libldap2` and `libsasl2`
+ 0. Use `bundle install` or install required gems manually
+ 0. Copy `config.yml.sample` to `config.yml`
+ 0. Configure your daemon through `config.yml`
+ 0. Start/Stop daemon using `ruby control.rb start` or `ruby control.rb stop`
  
 If you want to run daemon manually you can use `ruby git-auth-manager.rb`. Flag `--do-not-loop` tells program to sync users once and exit
 
